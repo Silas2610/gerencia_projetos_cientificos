@@ -14,6 +14,7 @@
             <li><a href="projetos.html#tecnologia">Tecnologia</a></li>
             <li><a href="projetos.html#quimica">Química</a></li>
             <!-- Adicione mais categorias conforme necessário -->
+            <li><a href="#" onclick="abrirFormulario()">Adicionar Projeto</a></li>
         </ul>
     </nav>
 
@@ -45,5 +46,68 @@
     <footer>
         <p>&copy; 2023 Meus Projetos Científicos</p>
     </footer>
+
+    <div id="formulario" style="display: none;">
+        <h2>Adicionar Projeto</h2>
+        <form onsubmit="adicionarProjeto(event)">
+            <label for="nomeProjeto">Nome do Projeto:</label>
+            <input type="text" id="nomeProjeto" required>
+            <br><br>
+            <label for="categoriaProjeto">Categoria:</label>
+            <select id="categoriaProjeto" required>
+                <option value="">Selecione uma categoria</option>
+                <option value="tecnologia">Tecnologia</option>
+                <option value="quimica">Química</option>
+                <!-- Adicione mais opções de categorias conforme necessário -->
+            </select>
+            <br><br>
+            <label for="linkProjeto">Link do Projeto:</label>
+            <input type="url" id="linkProjeto" required>
+            <br><br>
+            <input type="submit" value="Adicionar">
+        </form>
+    </div>
+
+    <script>
+        function abrirFormulario() {
+            document.getElementById('formulario').style.display = 'block';
+        }
+
+        function adicionarProjeto(event) {
+            event.preventDefault();
+            
+            var nomeProjeto = document.getElementById('nomeProjeto').value;
+            var categoriaProjeto = document.getElementById('categoriaProjeto').value;
+            var linkProjeto = document.getElementById('linkProjeto').value;
+
+            // Verifica se os campos foram preenchidos corretamente
+            if (nomeProjeto && categoriaProjeto && linkProjeto) {
+                var section = document.getElementById(categoriaProjeto);
+                var article = document.createElement('article');
+                var h4 = document.createElement('h4');
+                var p = document.createElement('p');
+                var img = document.createElement('img');
+
+                h4.textContent = nomeProjeto;
+                p.textContent = 'Descrição do projeto.';
+                img.src = 'caminho-para-imagem-projeto.jpg';
+                img.alt = 'Imagem do projeto';
+
+                article.appendChild(h4);
+                article.appendChild(p);
+                article.appendChild(img);
+
+                section.appendChild(article);
+
+                // Limpa os campos do formulário
+                document.getElementById('nomeProjeto').value = '';
+                document.getElementById('categoriaProjeto').value = '';
+                document.getElementById('linkProjeto').value = '';
+
+                // Fecha o formulário
+                document.getElementById('formulario').style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
